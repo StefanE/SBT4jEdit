@@ -1,0 +1,34 @@
+#general plugin information
+plugin.org.scala.sbt.SBTPlugin.activate=startup
+plugin.org.scala.sbt.SBTPlugin.name=SBTPlugin
+plugin.org.scala.sbt.SBTPlugin.author=Stefan Ettrup
+plugin.org.scala.sbt.SBTPlugin.version=0.01
+plugin.org.scala.sbt.SBTPlugin.docs=SBTPlugin.html
+
+#dependencies   Console.....
+plugin.org.scala.sbt.SBTPlugin.depend.0=jedit 04.03.01.99
+#Doesnt work? plugin.org.scala.sbt.SBTPlugin.depend.1= plugin projectviewer.ProjectViewerPlugin 03.00.00
+plugin.console.ConsolePlugin.depend.2=plugin errorlist.ErrorListPlugin 1.4
+
+
+plugin.org.scala.sbt.SBTPlugin.description=SBTPlugin implementation
+plugin.org.scala.sbt.SBTPlugin.longdescription=description.html
+
+#menu
+plugin.org.scala.sbt.SBTPlugin.menu= SBT
+
+#labels
+StartUp.label=Start SBT
+SBT.label=SBT Console
+
+#info/Error
+# argument {0}
+
+info.ready.title=Project Ready
+info.ready.message=Project has been initialized
+info.enterProject.title=Need directory
+info.enterProject.message=You need to enter the directory from which you want to start sbt
+
+error.noRefactor.title=Refactor Error
+error.noRefactor.message=The {0} refactoring failed, because of: "{1}"
+

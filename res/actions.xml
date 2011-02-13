@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE ACTIONS SYSTEM "actions.dtd">
+
+<ACTIONS>
+    <ACTION NAME="Start">
+        <CODE>
+            org.scala.sbt.SBTPlugin.StartUp(view);
+        </CODE>
+    </ACTION>
+    <ACTION NAME="SBT">
+		<CODE>
+			wm.addDockableWindow("console");
+			dockable = wm.getDockableWindow("console");
+			shell = console.Shell.getShell("SBT");
+            shell.setView(view);
+			shell.eval(dockable,"");
+		</CODE>
+	</ACTION>
+</ACTIONS>
