@@ -14,7 +14,7 @@
 			dockable = wm.getDockableWindow("console");
 			shell = console.Shell.getShell("SBT");
             shell.setView(view);
-			shell.eval(dockable,"");
+			//shell.eval(dockable,"");
 		</CODE>
 	</ACTION>
 </ACTIONS>

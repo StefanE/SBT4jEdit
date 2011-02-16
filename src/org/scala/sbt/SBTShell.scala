@@ -5,15 +5,28 @@ import org.gjt.sp.util.Log
 import procshell.ProcessShell
 import projectviewer.ProjectViewer
 import java.io.File
-import console.Output
 import errorlist.{DefaultErrorSource, ErrorSource}
 import org.gjt.sp.jedit.{GUIUtilities, View}
+import console.Shell.CompletionInfo
+import console.{ConsolePlugin, Console, Output}
 
 class SBTShell() extends ProcessShell("SBT") {
-  private var view: View = _
+  private var view: View = null
+
+
+  /*
+  def completion() = {
+    val console = ConsolePlugin.getConsole(view)
+    val text = console.getConsolePane
+
+  }
+  */
 
   protected override def init(state: ConsoleState, str: String) {
+
     Log.log(Log.DEBUG, this, "Attempting to start Scala process")
+    //this.consoleStateMap.entrySet.toArray.foreach(x => println(x))
+    //this.getCompletions()
 
     val project = ProjectViewer.getActiveProject(view)
     var file: File = null
@@ -32,6 +45,7 @@ class SBTShell() extends ProcessShell("SBT") {
     Log.log(Log.DEBUG, this, "Scala started.");
   }
 
+
   private def getScalaJars() = {
     val path = System.getProperty("user.home") + "\\.jedit\\jars\\"
     val lib = path + "scala-library.jar"
@@ -39,9 +53,33 @@ class SBTShell() extends ProcessShell("SBT") {
     lib + ";" + compiler
   }
 
+  override def getCompletions(console: Console, command: String): CompletionInfo = {
+
+    /* Temporary until this is redirected to SBT, this is not a complete list*/
+    val completion = new CompletionInfo
+    completion.completions = Array("compile", "console",
+      "clean", "clean-cache", "clean-lib", "clean-plugins",
+      "console-quick",
+      "doc", "doc-test", "doc-all",
+      "jetty", "jetty-run", "jetty-stop",
+      "update", "prepare-webap", "help", "test", "console", "console-quick",
+      "exec", "graph-src", "graph-pkg",
+      "javap", "test-javap",
+      "package", "package-test", "package-docs", "package-all", "package-project",
+      "package-all", "package-project", "package-src", "package-test-src",
+      "run", "sh",
+      "test-failed", "test-quick", "test-compile", "test-javap","test-run",
+      "exit","quit","reload","help","actions",
+      "current","info","debug", "trace on","trace nosbt","trace off","trace ",
+      "warn","error","projects","project","console-project")
+    completion.completions = completion.completions.filter(str => str.startsWith(command))
+    completion
+  }
+
   def setView(newView: View) {
     view = newView
   }
+
 
   protected override def onWrite(state: ConsoleState, str: String) = {
     clearErrors
