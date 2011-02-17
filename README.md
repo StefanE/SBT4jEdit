@@ -20,7 +20,7 @@ Look at the [downloads page](https://github.com/StefanE/SBT4jEdit/downloads) to 
 - Setup sbt project with GUI
 
 ##Showcase
-On the way [dummy](dummy)
+[Short video presentation](http://bit.ly/gazvQU)
 
 ##Howto
 
