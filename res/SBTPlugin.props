@@ -12,8 +12,27 @@ plugin.org.scala.sbt.SBTPlugin.depend.0=jedit 04.03.99.00
 plugin.console.ConsolePlugin.depend.1=plugin console.ConsolePlugin 4.4.2
 plugin.console.ConsolePlugin.depend.2=plugin projectviewer.ProjectPlugin 3.0.1
 
+#Colors
+org.scala.sbt.bgColor=#000000
+org.scala.sbt.plainColor=#ffffff
+org.scala.sbt.caretColor=#000000
+org.scala.sbt.infoColor=#009600
+org.scala.sbt.warningColor=#ffa800
+org.scala.sbt.errorColor=#ff0000
+
+options.org.scala.sbt.general.bgColor=Console background:
+options.org.scala.sbt.general.plainColor=Plain text:
+options.org.scala.sbt.general.caretColor=Caret:
+options.org.scala.sbt.general.warningColor=Warning messages:
+options.org.scala.sbt.general.errorColor=Error messages:
+options.org.scala.sbt.general.infoColor=Information messages:
+
 #menu
+plugin.org.scala.sbt.SBTPlugin.option-group= org.scala.sbt.SBTPlugin.general
+
 #plugin.org.scala.sbt.SBTPlugin.menu= SBT
+options.org.scala.sbt.SBTPlugin.general.code=new org.scala.sbt.OptionsPane();
+options.org.scala.sbt.SBTPlugin.general.label=Color Settings
 
 #labels
 StartUp.label=Start SBT

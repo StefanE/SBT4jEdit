@@ -11,12 +11,12 @@ Look at the [downloads page](https://github.com/StefanE/SBT4jEdit/downloads) to 
 - Error highlighting when compiling/testing
 - Support for continous execution
 - Errors,warnings etc. should be colored in console (Should be refined)
+- Make console colors configurable (some of them are, not all. Yet)
 
 ##TODO
 - Get real completion in sbt console
 - Remove repetition of entered command in console
 - easy processors installation/guide
-- Make console colors configurable
 - Setup sbt project with GUI
 
 ##Showcase

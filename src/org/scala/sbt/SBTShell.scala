@@ -124,7 +124,7 @@ class SBTShell() extends ProcessShell("SBT") {
         if (localString.startsWith("[error]")) {
           val pattern = """\[error\](\s)(\w):([\\|\w|.]*):(\d*):(\s)([\w*|(\s)|\W]*)""".r
           val list = pattern.unapplySeq(localString).getOrElse(null)
-          outColor = Color.RED
+          outColor = Colors.errorColor
           if (list != null && list.size > 5) {
             Log.log(Log.DEBUG, this, "REGISTER#" + pattern.unapplySeq(localString).get.toString)
             errorSource.addError(2, list(1) + ":" + list(2), (list(3).toInt) - 1, 0, 0, list(5))
@@ -133,21 +133,24 @@ class SBTShell() extends ProcessShell("SBT") {
         else if (localString.startsWith("[warn]")) {
           val pattern = """\[warn\](\s)(\w):([\\|\w|.]*):(\d*):(\s)([\w*|(\s)|\W]*)""".r
           val list = pattern.unapplySeq(localString).getOrElse(null)
-          outColor = Color.YELLOW
+          outColor = Colors.warningColor
           if (list != null && list.size > 5) {
             Log.log(Log.DEBUG, this, pattern.unapplySeq(localString).get.toString)
             errorSource.addError(1, list(1) + ":" + list(2), (list(3).toInt) - 1, 0, 0, list(5))
           }
         }
         else if (localString.contains("Waiting for source changes")) {
-          outColor = Color.BLACK
+          outColor = Colors.plainColor
           clearOnNextChange = true
 
         }
         else if (localString.startsWith("[info]"))
-          outColor = Color.GREEN
+        {
+          outColor = Colors.infoColor
+          Log.log(Log.ERROR,this,"green"+outColor.getGreen)
+        }
         else
-          outColor = Color.BLACK
+          outColor = Colors.plainColor
         //Bad practice should do from actor
         OutputWriter ! (localString+"\n",outColor)
       }
@@ -160,7 +163,7 @@ class SBTShell() extends ProcessShell("SBT") {
       else tmpString = lines.last
     }
     else if (str == "> ") {
-      outColor = Color.BLACK
+      outColor = Colors.plainColor
       rdy = true
       parsedOut = str
       tmpString = ""
@@ -170,6 +173,8 @@ class SBTShell() extends ProcessShell("SBT") {
       tmpString += str
     }
   }
+
+
 
   override def initStreams(console: Console, state: ConsoleState) {
     new SBTProcessReader(console, state, false).start();
