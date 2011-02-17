@@ -6,10 +6,6 @@ object SBTPlugin {
 
   val NAME = "SBTPlugin"
 
-  def StartUp(view:View) {
-
-  }
-
 }
 
 class SBTPlugin extends EBPlugin {

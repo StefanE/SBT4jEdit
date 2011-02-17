@@ -2,20 +2,18 @@
 plugin.org.scala.sbt.SBTPlugin.activate=startup
 plugin.org.scala.sbt.SBTPlugin.name=SBTPlugin
 plugin.org.scala.sbt.SBTPlugin.author=Stefan Ettrup
-plugin.org.scala.sbt.SBTPlugin.version=0.01
+plugin.org.scala.sbt.SBTPlugin.version=0.02
 plugin.org.scala.sbt.SBTPlugin.docs=SBTPlugin.html
-
-#dependencies   Console.....
-plugin.org.scala.sbt.SBTPlugin.depend.0=jedit 04.03.01.99
-#Doesnt work? plugin.org.scala.sbt.SBTPlugin.depend.1= plugin projectviewer.ProjectViewerPlugin 03.00.00
-plugin.console.ConsolePlugin.depend.2=plugin errorlist.ErrorListPlugin 1.4
-
-
 plugin.org.scala.sbt.SBTPlugin.description=SBTPlugin implementation
 plugin.org.scala.sbt.SBTPlugin.longdescription=description.html
 
+#dependencies
+plugin.org.scala.sbt.SBTPlugin.depend.0=jedit 04.03.99.00
+plugin.console.ConsolePlugin.depend.1=plugin console.ConsolePlugin 4.4.2
+plugin.console.ConsolePlugin.depend.2=plugin projectviewer.ProjectPlugin 3.0.1
+
 #menu
-plugin.org.scala.sbt.SBTPlugin.menu= SBT
+#plugin.org.scala.sbt.SBTPlugin.menu= SBT
 
 #labels
 StartUp.label=Start SBT
