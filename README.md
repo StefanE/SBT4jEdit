@@ -23,13 +23,13 @@ Look at the [downloads page](https://github.com/StefanE/SBT4jEdit/downloads) to 
 On the way [dummy](dummy)
 
 ##Howto
--Download the [plugin](https://github.com/StefanE/SBT4jEdit/downloads)
 
--Extract the jars to jEdits "jars" folder.
+Download the [plugin](https://github.com/StefanE/SBT4jEdit/downloads)
 
--First time you should load the plugin from "Plugin Manager"
+Extract the jars to jEdits "jars" folder.
 
--When you start SBT, it will take the rootpath from your current active project in Project Viewer.
- If you haven't chosen a project, it will ask for a path to start in.
+First time you should load the plugin from "Plugin Manager"
 
--Now it should be ready to use...
+When you start SBT, it will take the rootpath from your current active project in Project Viewer. If you haven't chosen a project, it will ask for a path to start in.
+
+Now it should be ready to use...
