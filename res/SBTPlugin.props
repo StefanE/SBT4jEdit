@@ -2,7 +2,7 @@
 plugin.org.scala.sbt.SBTPlugin.activate=startup
 plugin.org.scala.sbt.SBTPlugin.name=SBTPlugin
 plugin.org.scala.sbt.SBTPlugin.author=Stefan Ettrup
-plugin.org.scala.sbt.SBTPlugin.version=0.02
+plugin.org.scala.sbt.SBTPlugin.version=0.1
 plugin.org.scala.sbt.SBTPlugin.docs=SBTPlugin.html
 plugin.org.scala.sbt.SBTPlugin.description=SBTPlugin implementation
 plugin.org.scala.sbt.SBTPlugin.longdescription=description.html
@@ -33,6 +33,9 @@ plugin.org.scala.sbt.SBTPlugin.option-group= org.scala.sbt.SBTPlugin.general
 #plugin.org.scala.sbt.SBTPlugin.menu= SBT
 options.org.scala.sbt.SBTPlugin.general.code=new org.scala.sbt.OptionsPane();
 options.org.scala.sbt.SBTPlugin.general.label=Color Settings
+
+#sbt command
+org.scala.sbt.cmd=sbt.bat
 
 #labels
 StartUp.label=Start SBT

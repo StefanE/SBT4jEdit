@@ -35,7 +35,7 @@ class SBTShell() extends ProcessShell("SBT") {
     else {
       file = new File(project.getRootPath)
     }
-    val pb = new ProcessBuilder("sbt.bat")
+    val pb = new ProcessBuilder(jEdit.getProperty("org.scala.sbt.cmd"))
 
     pb.directory(file)
 
