@@ -112,31 +112,40 @@ class SBTShell() extends ProcessShell("SBT") {
     if (str.contains("\n")) {
 
       tmpString += str
+      /* Fix created by Iliyn Anton V to remove color escape sequences*/
+      //We need to remove escape color sequences!
+      val escapePattern = """\e\[\d*m""".r
+      tmpString = escapePattern.replaceAllIn(tmpString, "")
+
       //Look in clojure plugin for repl style
       Log.log(Log.DEBUG, this, "onRead#" + tmpString.mkString("#", "", "#"))
       val lines = tmpString.split('\n')
-      val lastLineOK = if(str.endsWith("\n")) true else false
+      val lastLineOK = if (str.endsWith("\n")) true else false
 
-      val size = if (lastLineOK) lines.size else lines.size -1
+      val size = if (lastLineOK) lines.size else lines.size - 1
 
-      for(counter <- 0 until size) {
+      for (counter <- 0 until size) {
         val localString = lines(counter)
         if (localString.startsWith("[error]")) {
-          val pattern = """\[error\](\s)(\w):([\\|\w|.]*):(\d*):(\s)([\w*|(\s)|\W]*)""".r
+          Log.log(Log.DEBUG, this, "SBT Plugin error found")
+          /* Another fix created by Iliyn Anton V to fix path issues on linux*/
+          //val pattern = """\[error\](\s)(\w):([\\|\w|.]*):(\d*):(\s)([\w*|(\s)|\W]*)""".r
+          val pattern = """\[error\]\s(/[/|.|\w]*|\w:[\\|\w|.]*):(\d*):\s([\w*|(\s)|\W]*)""".r
+
           val list = pattern.unapplySeq(localString).getOrElse(null)
           outColor = Colors.errorColor
-          if (list != null && list.size > 5) {
+          if (list != null && list.size == 3) {
             Log.log(Log.DEBUG, this, "REGISTER#" + pattern.unapplySeq(localString).get.toString)
-            errorSource.addError(2, list(1) + ":" + list(2), (list(3).toInt) - 1, 0, 0, list(5))
+            errorSource.addError(2, list(0), (list(1).toInt) - 1, 0, 0, list(2))
           }
         }
         else if (localString.startsWith("[warn]")) {
-          val pattern = """\[warn\](\s)(\w):([\\|\w|.]*):(\d*):(\s)([\w*|(\s)|\W]*)""".r
+          val pattern = """\[warn\]\s(/[/|.|\w]*|\w:[\\|\w|.]*):(\d*):\s([\w*|(\s)|\W]*)""".r
           val list = pattern.unapplySeq(localString).getOrElse(null)
           outColor = Colors.warningColor
           if (list != null && list.size > 5) {
             Log.log(Log.DEBUG, this, pattern.unapplySeq(localString).get.toString)
-            errorSource.addError(1, list(1) + ":" + list(2), (list(3).toInt) - 1, 0, 0, list(5))
+            errorSource.addError(1, list(0), (list(1).toInt) - 1, 0, 0, list(2))
           }
         }
         else if (localString.contains("Waiting for source changes")) {
@@ -144,21 +153,20 @@ class SBTShell() extends ProcessShell("SBT") {
           clearOnNextChange = true
 
         }
-        else if (localString.startsWith("[info]"))
-        {
+        else if (localString.startsWith("[info]")) {
           outColor = Colors.infoColor
-          Log.log(Log.ERROR,this,"green"+outColor.getGreen)
+          Log.log(Log.ERROR, this, "green" + outColor.getGreen)
         }
         else
           outColor = Colors.plainColor
         //Bad practice should do from actor
-        OutputWriter ! (localString+"\n",outColor)
+        OutputWriter ! (localString + "\n", outColor)
       }
 
       rdy = true
       parsedOut = tmpString
       //Reset String
-      if(lastLineOK)
+      if (lastLineOK)
         tmpString = ""
       else tmpString = lines.last
     }
@@ -167,13 +175,12 @@ class SBTShell() extends ProcessShell("SBT") {
       rdy = true
       parsedOut = str
       tmpString = ""
-      OutputWriter ! (str,outColor)
+      OutputWriter ! (str, outColor)
     }
     else {
       tmpString += str
     }
   }
-
 
 
   override def initStreams(console: Console, state: ConsoleState) {
