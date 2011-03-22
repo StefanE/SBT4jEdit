@@ -143,7 +143,7 @@ class SBTShell() extends ProcessShell("SBT") {
           val pattern = """\[warn\]\s(/[/|.|\w]*|\w:[\\|\w|.]*):(\d*):\s([\w*|(\s)|\W]*)""".r
           val list = pattern.unapplySeq(localString).getOrElse(null)
           outColor = Colors.warningColor
-          if (list != null && list.size > 5) {
+          if (list != null && list.size > 3) {
             Log.log(Log.DEBUG, this, pattern.unapplySeq(localString).get.toString)
             errorSource.addError(1, list(0), (list(1).toInt) - 1, 0, 0, list(2))
           }
